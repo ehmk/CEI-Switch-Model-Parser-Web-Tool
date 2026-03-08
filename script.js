@@ -43,6 +43,20 @@ const input = document.getElementById('modelInput');
 const output = document.getElementById('output-box');
 const status = document.getElementById('copy-status');
 
+// Detect typing and pasting automatically
+input.addEventListener('input', function () {
+    const raw = input.value.trim().toUpperCase();
+    
+    // Auto-trigger if it looks like a full part number (Hyphen + 6 digits)
+    if (raw.includes('-')) {
+        const parts = raw.split('-');
+        if (parts[1] && parts[1].length >= 6) {
+            decode();
+        }
+    }
+});
+
+// Backup: Allow manual 'Enter' key press
 input.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         decode();
@@ -64,7 +78,7 @@ function decode() {
     const mainMatch = parts[0].match(/^([A-Z]\d+)([A-Z])/);
     
     if (!mainMatch || parts.length < 2) {
-        alert("Invalid Format. Use: B1-110100");
+        // We silent the alert for the 'input' listener to avoid popups while typing
         return;
     }
 
