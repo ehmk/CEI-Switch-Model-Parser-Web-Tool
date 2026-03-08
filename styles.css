@@ -1,0 +1,54 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #1a1a1a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+h2 {
+    border-bottom: 2px solid white;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    background: #000;
+    border: 1px solid white;
+    color: white;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#output-box {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px dashed white;
+    white-space: pre-wrap;
+    cursor: pointer;
+    display: none;
+    position: relative;
+    line-height: 1.4;
+}
+
+#output-box:hover {
+    background-color: #222;
+}
+
+.copy-hint {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 10px;
+    text-align: center;
+}
