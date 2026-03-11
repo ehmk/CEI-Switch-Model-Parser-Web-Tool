@@ -4,8 +4,8 @@
     --border: #2d2d2d;
     --text-main: #ffffff;
     --text-dim: #888;
-    --accent: #00ff88; /* Industrial Green */
-    --danger: #ff4444; /* Alert Red */
+    --accent: #00ff88;
+    --danger: #ff4444;
 }
 
 body {
@@ -13,18 +13,18 @@ body {
     color: var(--text-main);
     font-family: 'Segoe UI', system-ui, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 15px; /* Tighter padding for mobile */
 }
 
 .app-container { max-width: 1200px; margin: 0 auto; }
 
-header { text-align: center; margin-bottom: 30px; }
+header { text-align: center; margin-bottom: 20px; }
 
 .search-bar {
     display: flex;
     max-width: 500px;
-    margin: 20px auto;
-    gap: 10px;
+    margin: 15px auto;
+    gap: 8px;
 }
 
 input {
@@ -35,138 +35,110 @@ input {
     color: white;
     border-radius: 6px;
     font-size: 1rem;
-    outline: none;
+    min-width: 0; /* Prevents input from pushing off screen */
 }
 
-input:focus { border-color: var(--accent); }
+input:focus { border-color: var(--accent); outline: none; }
 
 button {
     background: var(--accent);
     color: #000;
     border: none;
-    padding: 0 20px;
+    padding: 0 15px;
     border-radius: 6px;
     font-weight: 900;
     cursor: pointer;
-    transition: transform 0.1s;
 }
 
-button:active { transform: scale(0.95); }
-
-/* Model Badge Styling */
+/* Model Badge - Responsive Layout */
 .model-header {
-    text-align: center;
-    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
     padding: 15px;
     background: var(--card-bg);
     border-radius: 8px;
     border: 1px solid var(--border);
 }
 
-.model-header .label {
+.model-label {
     color: var(--text-dim);
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: bold;
-    margin-right: 15px;
+    letter-spacing: 1.5px;
 }
 
 .model-badge {
     background: var(--accent);
     color: #000;
-    padding: 6px 16px;
+    padding: 8px 16px;
     border-radius: 4px;
     font-weight: 900;
     font-family: 'Courier New', monospace;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+    word-break: break-all;
+    text-align: center;
 }
 
-/* Three-Column Grid Layout */
+/* Grid Layout - Mobile First (Stacks by default) */
 .grid-layout {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 20px;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+@media (min-width: 850px) {
+    .grid-layout { grid-template-columns: 1.2fr 0.8fr; gap: 20px; }
+    .model-header { flex-direction: row; justify-content: center; }
+    .model-badge { font-size: 1.6rem; }
 }
 
 .card {
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 24px;
-    position: relative;
+    padding: 20px;
 }
 
 h3 {
     margin-top: 0;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-dim);
     letter-spacing: 2px;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+    padding-bottom: 8px;
 }
 
-/* Data Rows */
+/* Three-Column Data Rows */
 .data-grid div {
     display: grid;
-    grid-template-columns: 110px 80px 1fr; /* Label | Code | Value */
+    grid-template-columns: 100px 70px 1fr;
     align-items: center;
-    padding: 12px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #252525;
 }
 
-.data-grid div:last-child { border-bottom: none; }
+.copyable-row { cursor: pointer; transition: background 0.2s; }
+.copyable-row:hover { background: #222; }
 
-.copyable-row {
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.copyable-row:hover {
-    background: #222 !important;
-}
-
-/* Code Badge Styling (The middle column) */
 .code-badge {
-    font-family: 'Consolas', monospace;
+    font-family: monospace;
     font-size: 0.7rem;
     color: var(--accent);
     background: #111;
-    padding: 2px 8px;
+    padding: 2px 6px;
     border-radius: 4px;
-    text-align: center;
     width: fit-content;
     justify-self: center;
     border: 1px solid #333;
     opacity: 0.8;
 }
 
-.label-text {
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.val-text {
-    font-weight: 600;
-    text-align: right;
-    font-family: 'Consolas', monospace;
-    font-size: 0.95rem;
-}
-
+.label-text { color: var(--text-dim); font-size: 0.7rem; font-weight: bold; }
+.val-text { font-weight: 600; text-align: right; font-family: monospace; font-size: 0.9rem; }
 .electrical-val { color: var(--accent); }
-
-.highlight-red { 
-    color: var(--danger); 
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-.hint {
-    margin-top: 15px;
-    font-size: 0.7rem;
-    color: #444;
-    text-align: right;
-}
+.highlight-red { color: var(--danger); font-weight: 900; }
+.hint { margin-top: 10px; font-size: 0.65rem; color: #444; text-align: right; }

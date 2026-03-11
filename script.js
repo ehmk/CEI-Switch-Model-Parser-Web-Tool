@@ -11,8 +11,6 @@ const LOGIC = {'1':"Cut off",'2':"TTL",'3':"Cut off/TTL",'4':"BCD TTL",'5':"Cut 
 const IM = {'7':"Low (-110)",'8':"Superior (-160)",'9':"Ultra (-130)",'0':"Standard"};
 const SPECIAL = {"/P":"High Temp","/MS":"Ext Temp","/MSP":"High/Ext Temp"};
 
-// ... [Keep constants at the top] ...
-
 function decode() {
     const input = document.getElementById('modelInput');
     const raw = input.value.trim().toUpperCase();
@@ -41,7 +39,6 @@ function decode() {
     document.getElementById('display-area').style.display = 'block';
     const badge = document.getElementById('model-display');
     badge.innerText = raw;
-    // Badge copies the full Part Number
     badge.onclick = () => copyText(raw, badge);
 
     const electricalSpecs = [
@@ -88,23 +85,18 @@ function decode() {
     input.value = '';
 }
 
-// Fixed copy function to take the clean value
 function copyText(valToCopy, element) {
-    // Ensure we are copying the raw string, not the HTML spans
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = valToCopy;
     const cleanText = tempDiv.textContent || tempDiv.innerText || "";
 
     navigator.clipboard.writeText(cleanText).then(() => {
         const originalBg = element.style.backgroundColor;
-        element.style.backgroundColor = "rgba(0, 255, 136, 0.2)"; // Subtle green flash
-        setTimeout(() => {
-            element.style.backgroundColor = originalBg;
-        }, 200);
+        element.style.backgroundColor = "rgba(0, 255, 136, 0.2)";
+        setTimeout(() => { element.style.backgroundColor = originalBg; }, 200);
     });
 }
 
-// Enter Key Support
 document.getElementById("modelInput").addEventListener("keypress", (e) => {
     if (e.key === "Enter") decode();
 });
