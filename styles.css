@@ -1,54 +1,172 @@
+:root {
+    --bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --border: #2d2d2d;
+    --text-main: #ffffff;
+    --text-dim: #888;
+    --accent: #00ff88; /* Industrial Green */
+    --danger: #ff4444; /* Alert Red */
+}
+
 body {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #1a1a1a;
-    color: white;
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.app-container { max-width: 1200px; margin: 0 auto; }
+
+header { text-align: center; margin-bottom: 30px; }
+
+.search-bar {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px;
-}
-
-.container {
-    width: 100%;
-    max-width: 800px;
-}
-
-h2 {
-    border-bottom: 2px solid white;
-    padding-bottom: 10px;
-    text-align: center;
+    max-width: 500px;
+    margin: 20px auto;
+    gap: 10px;
 }
 
 input {
-    width: 100%;
-    padding: 15px;
-    background: #000;
-    border: 1px solid white;
+    flex: 1;
+    background: #222;
+    border: 1px solid var(--border);
+    padding: 12px;
     color: white;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    box-sizing: border-box;
+    border-radius: 6px;
+    font-size: 1rem;
     outline: none;
 }
 
-#output-box {
-    margin-top: 30px;
-    padding: 20px;
-    border: 1px dashed white;
-    white-space: pre-wrap;
+input:focus { border-color: var(--accent); }
+
+button {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 0 20px;
+    border-radius: 6px;
+    font-weight: 900;
     cursor: pointer;
-    display: none;
-    position: relative;
-    line-height: 1.4;
+    transition: transform 0.1s;
 }
 
-#output-box:hover {
-    background-color: #222;
-}
+button:active { transform: scale(0.95); }
 
-.copy-hint {
-    font-size: 0.8rem;
-    color: #888;
-    margin-top: 10px;
+/* Model Badge Styling */
+.model-header {
     text-align: center;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.model-header .label {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.model-badge {
+    background: var(--accent);
+    color: #000;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-weight: 900;
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+/* Three-Column Grid Layout */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+}
+
+h3 {
+    margin-top: 0;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* Data Rows */
+.data-grid div {
+    display: grid;
+    grid-template-columns: 110px 80px 1fr; /* Label | Code | Value */
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #252525;
+}
+
+.data-grid div:last-child { border-bottom: none; }
+
+.copyable-row {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.copyable-row:hover {
+    background: #222 !important;
+}
+
+/* Code Badge Styling (The middle column) */
+.code-badge {
+    font-family: 'Consolas', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: #111;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-align: center;
+    width: fit-content;
+    justify-self: center;
+    border: 1px solid #333;
+    opacity: 0.8;
+}
+
+.label-text {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.val-text {
+    font-weight: 600;
+    text-align: right;
+    font-family: 'Consolas', monospace;
+    font-size: 0.95rem;
+}
+
+.electrical-val { color: var(--accent); }
+
+.highlight-red { 
+    color: var(--danger); 
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.hint {
+    margin-top: 15px;
+    font-size: 0.7rem;
+    color: #444;
+    text-align: right;
 }
