@@ -41,6 +41,7 @@ function decode() {
     badge.innerText = raw;
     badge.onclick = () => copyText(raw, badge);
 
+    // Build Electrical Specs (3 Columns)
     const electricalSpecs = [
         { label: "Series",    code: ser,   val: seriesDesc },
         { label: "Actuator",  code: act,   val: ACTUATORS[act] || "Invalid" },
@@ -53,7 +54,9 @@ function decode() {
         { label: "Special",   code: suffix, val: SPECIAL[suffix] || suffix }
     ];
 
-    document.getElementById('spec-list').innerHTML = electricalSpecs.map(s => `
+    const specList = document.getElementById('spec-list');
+    specList.className = "data-grid electrical-grid";
+    specList.innerHTML = electricalSpecs.map(s => `
         <div class="copyable-row" onclick="copyText('${s.val}', this)">
             <span class="label-text">${s.label}</span>
             <span class="code-badge">${s.code}</span>
@@ -61,23 +64,24 @@ function decode() {
         </div>
     `).join('');
 
+    // Build Mechanical Specs (2 Columns)
     const fmt = (v) => (v === "SIL" || v === "POLISHED") ? `<span class="highlight-red">${v}</span>` : v;
     const cavityVal = CAVITY_MAP[ser] || CAVITY_MAP[ser[0]] || "Standard";
-    const prepTrigger = (suffix.includes("/MS")) ? suffix : (coating === "SIL" ? pb[5] : "---");
 
     const mechSpecs = [
-        { label: "CAVITY",  code: ser,    val: cavityVal, disp: cavityVal },
-        { label: "COATING", code: pb[5],  val: coating, disp: fmt(coating) },
-        { label: "CONN",    code: ser[0], val: connector, disp: connector },
-        { label: "SHELL",   code: pb[0],  val: shell, disp: shell },
-        { label: "PROBE",   code: suffix, val: probe, disp: probe },
-        { label: "PREP",    code: prepTrigger, val: contactPrep, disp: fmt(contactPrep) }
+        { label: "CAVITY",  val: cavityVal, disp: cavityVal },
+        { label: "COATING", val: coating,   disp: fmt(coating) },
+        { label: "CONN",    val: connector, disp: connector },
+        { label: "SHELL",   val: shell,     disp: shell },
+        { label: "PROBE",   val: probe,     disp: probe },
+        { label: "PREP",    val: contactPrep, disp: fmt(contactPrep) }
     ];
 
-    document.getElementById('cavity-output').innerHTML = mechSpecs.map(s => `
+    const mechList = document.getElementById('cavity-output');
+    mechList.className = "data-grid mech-grid";
+    mechList.innerHTML = mechSpecs.map(s => `
         <div class="copyable-row" onclick="copyText('${s.val}', this)">
             <span class="label-text">${s.label}</span>
-            <span class="code-badge">${s.code}</span>
             <span class="val-text">${s.disp}</span>
         </div>
     `).join('');

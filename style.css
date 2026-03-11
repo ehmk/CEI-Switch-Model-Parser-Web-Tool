@@ -13,7 +13,7 @@ body {
     color: var(--text-main);
     font-family: 'Segoe UI', system-ui, sans-serif;
     margin: 0;
-    padding: 15px; /* Tighter padding for mobile */
+    padding: 15px;
 }
 
 .app-container { max-width: 1200px; margin: 0 auto; }
@@ -35,7 +35,7 @@ input {
     color: white;
     border-radius: 6px;
     font-size: 1rem;
-    min-width: 0; /* Prevents input from pushing off screen */
+    min-width: 0;
 }
 
 input:focus { border-color: var(--accent); outline: none; }
@@ -83,7 +83,7 @@ button {
     text-align: center;
 }
 
-/* Grid Layout - Mobile First (Stacks by default) */
+/* Grid Layout - Mobile First */
 .grid-layout {
     display: grid;
     grid-template-columns: 1fr;
@@ -112,12 +112,21 @@ h3 {
     padding-bottom: 8px;
 }
 
-/* Three-Column Data Rows */
-.data-grid div {
+/* Three-Column Data Rows (Electrical) */
+.electrical-grid div {
     display: grid;
     grid-template-columns: 100px 70px 1fr;
     align-items: center;
     padding: 10px 0;
+    border-bottom: 1px solid #252525;
+}
+
+/* Two-Column Data Rows (Mechanical) */
+.mech-grid div {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    align-items: center;
+    padding: 12px 0;
     border-bottom: 1px solid #252525;
 }
 
